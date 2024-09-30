@@ -45,12 +45,14 @@ const newpost = () => {
 
   return (
     <div className='app'>
-        <img src="https://images.pexels.com/photos/1231230/pexels-photo-1231230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        {/* <img src="https://images.pexels.com/photos/1231230/pexels-photo-1231230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         alt=""
         width="940"
         height="650"
         ref={imgRef}
-        crossOrigin='anonymous'/>
+        crossOrigin='anonymous'/> */}
+
+        <img src="" alt="" />
 
         <canvas
         width="940"
