@@ -1,6 +1,6 @@
 import React from 'react'
 
-const navbar = () => {
+const Navbar = () => {
   return (
     <div className='navbar'>
         <span>AI Face Detection App</span>
@@ -8,4 +8,4 @@ const navbar = () => {
   )
 }
 
-export default navbar
+export default Navbar
