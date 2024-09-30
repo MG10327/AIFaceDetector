@@ -4,5 +4,15 @@
 
 canvas {
     position: absolute;
+}
 
+.navbar {
+    height: 50px;
+    background-color: #4064ac;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    padding: 0 100px;
+    font-size: 20px;
 }
