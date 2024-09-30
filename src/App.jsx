@@ -1,63 +1,58 @@
-import React, {useEffect, useRef} from 'react'
-import * as faceapi from 'face-api.js'
+import React, { useEffect, useState } from 'react'
 import './App.css'
+import Navbar from './components/navbar'
+import Newpost from './components/newpost'
+import avatar from './assets/avatar.webp'
+import map from './assets/map.png'
+import calendar from './assets/calendar.png'
+import addImage from './assets/addimage.png'
 
 const App = () => {
-  const imgRef = useRef()
-  const canvasRef = useRef()
 
-  const handleImage = async () => {
-    const detections = await faceapi
-    .detectAllFaces(imgRef.current, new faceapi.TinyFaceDetectorOptions())
-    .withFaceLandmarks()
-    .withFaceExpressions()
+  const [file, setFile] = useState()
+  const [image, setImage] = useState()
 
-    canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(imgRef.current)
-    faceapi.matchDimensions(canvasRef.current, {
-      width: 940,
-      height: 650,
-    })
-
-    const resized = faceapi.resizeResults(detections, {
-      width: 940,
-      height: 650,
-    })
-
-    faceapi.draw.drawDetections(canvasRef.current, resized)
-    faceapi.draw.drawFaceExpressions(canvasRef.current, resized)
-    faceapi.draw.drawFaceLandmarks(canvasRef.current, resized)
-  }
-
-
-  useEffect( () => {
-    const loadModels = () => {
-      Promise.all([
-        faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-        faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
-        faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-      ])
-      .then(handleImage)
-      .catch((e) => console.log(e))
+  useEffect(()=> {
+    const getImage = () => {
+      const img = new Image()
+      img.src = URL.createObjectURL(file)
+      img.onload = () => {
+        setImage({
+          url: img.src,
+          width: img.width,
+          height: img.height
+        })
+      }
     }
+    file && getImage()
 
-  imgRef.current && loadModels()
-  }, [])
+  }, [file])
 
   return (
-    <div className='app'>
-      <img src="https://images.pexels.com/photos/1231230/pexels-photo-1231230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-      alt=""
-      width="940"
-      height="650"
-      ref={imgRef}
-      crossOrigin='anonymous'/>
+    <div>
+      <Navbar />
+      {image ?(<Newpost image={image}/>) : (
+        <div className="newPostCard">
+          <div className="addPost">
+            <img src={avatar} alt="" className='avatar' />
+            <div className="postForm">
 
-      <canvas
-      width="940"
-      height="650"
-      ref={canvasRef}
-      ></canvas>
+              <input type="text" placeholder="What's on your mind?" className="postInput"/>
 
+              <label htmlFor="file">
+                <img src={addImage} alt="" className='fileImages' />
+                <img src={map} alt="" className='fileImages'  />
+                <img src={calendar} alt="" className='fileImages'  />
+                <button>Send</button>
+
+              </label>
+
+              <input onChange={(e) => setFile(e.target.files[0])} style={{display: "none"}} type="file" id="file"/>
+  
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
