@@ -2,7 +2,9 @@ import React, {useEffect, useRef}  from 'react'
 import * as faceapi from 'face-api.js'
 
 
-const newpost = () => {
+const newpost = ({image}) => {
+    const {url, width, height} = image
+
     const imgRef = useRef()
     const canvasRef = useRef()
   
@@ -14,13 +16,13 @@ const newpost = () => {
   
       canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(imgRef.current)
       faceapi.matchDimensions(canvasRef.current, {
-        width: 940,
-        height: 650,
+        width,
+        height,
       })
   
       const resized = faceapi.resizeResults(detections, {
-        width: 940,
-        height: 650,
+        width,
+        height,
       })
   
       faceapi.draw.drawDetections(canvasRef.current, resized)
@@ -44,21 +46,23 @@ const newpost = () => {
     }, [])
 
   return (
-    <div className='app'>
-        {/* <img src="https://images.pexels.com/photos/1231230/pexels-photo-1231230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt=""
-        width="940"
-        height="650"
-        ref={imgRef}
-        crossOrigin='anonymous'/> */}
+    <div className='container'>
 
-        <img src="" alt="" />
+        <div className="left-side" style={{height,width}}>
+            <img ref={imgRef} crossOrigin='anonymous' src={url} alt="" />
+            <canvas
+            width={width}
+            height={height}
+            ref={canvasRef}
+            ></canvas>
+        </div>
+        <div className="right-side">
+            <h1>Share your post</h1>
+            <input type="text" placeholder="What's on your mind?" className='rightInput' />
+            <button className='rightButton'>Send</button>
+        </div>
 
-        <canvas
-        width="940"
-        height="650"
-        ref={canvasRef}
-        ></canvas>
+
   </div>
   )
 }
