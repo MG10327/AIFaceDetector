@@ -32,12 +32,13 @@ label {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .fileImages {
+        width: 25px;
+        cursor: pointer;
+    }
 }
 
-.fileImages {
-    width: 25px;
-    cursor: pointer;
-}
 
 .postForm {
     display: flex;
@@ -64,4 +65,49 @@ button {
     height: 30px;
     border: none;
     margin-bottom: 10px;
+}
+
+.container {
+    height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.right-side {
+    padding: 10px 20px;
+    font-weight: bold;
+
+    .rightInput {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .rightButton {
+        padding: 10px 20px;
+        font-weight: bold;
+    }
+}
+
+.friendInput {
+    position: absolute;
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+}
+
+.friends {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.name {
+    font-weight: bold;
 }
