@@ -52,7 +52,12 @@ const Newpost = ({image}) => {
             onMouseEnter={enter}
             ></canvas>
             {faces.map((face, i)=>(
-                <input placeholder='Tag your friend' key={i} className='friendInput'/>
+                <input
+                style={{left:face[0], top: face[1] + face[3] + 5}}
+                placeholder='Tag your friend'
+                key={i}
+                className='friendInput'
+                />
             ))}
         </div>
         <div className="right-side">
