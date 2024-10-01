@@ -51,6 +51,9 @@ const Newpost = ({image}) => {
             ref={canvasRef}
             onMouseEnter={enter}
             ></canvas>
+            {faces.map((face, i)=>(
+                <input placeholder='Tag your friend' key={i} className='friendInput'/>
+            ))}
         </div>
         <div className="right-side">
             <h1>Share your post</h1>
