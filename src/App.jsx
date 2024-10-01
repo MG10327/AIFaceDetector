@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './App.css'
+import './App.scss'
 import Navbar from './components/navbar'
 import Newpost from './components/newpost'
 import avatar from './assets/avatar.webp'
